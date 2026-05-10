@@ -1,16 +1,21 @@
-name: Run Python Script
+name: Chained Workflow Example
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  run:
+  first-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Run script
+      - name: Run first script
         run: python phytonnew/assignments.py
+
+  second-job:
+    runs-on: ubuntu-latest
+    needs: first-job   # ✅ only runs if first-job succeeds
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run second script
+        run: python phytonnew/dictionary.py
