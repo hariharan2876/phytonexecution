@@ -3,7 +3,8 @@ name: Chained Workflow Example
 on:
   push:
     branches: [ main ]
-
+    schedule:
+    - cron: '*/10 * * * *'   # every 10 minutes (UTC)
 jobs:
   first-job:
     runs-on: ubuntu-latest
