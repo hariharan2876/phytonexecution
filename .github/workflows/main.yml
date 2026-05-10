@@ -13,4 +13,4 @@ jobs:
         with:
           python-version: '3.11'
       - name: Run script
-        run: python assignments.py
+        run: python phytonnew/assignments.py
