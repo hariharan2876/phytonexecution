@@ -1,0 +1,26 @@
+name: Form Triggered Python Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'Select which Python script to run'
+        required: true
+        type: choice
+        options:
+          - assignments.py
+          - dictionary.py
+          - cleanup.py
+
+jobs:
+  run-selected-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run chosen script
+        run: |
+          echo "Running ${{ github.event.inputs.script }}"
+          python phytonnew/${{ github.event.inputs.script }}
